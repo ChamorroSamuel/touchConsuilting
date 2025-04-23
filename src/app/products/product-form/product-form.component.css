@@ -1,0 +1,11 @@
+.full-width {
+  width: 100%;
+}
+mat-card {
+  margin: 16px;
+}
+.button-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}

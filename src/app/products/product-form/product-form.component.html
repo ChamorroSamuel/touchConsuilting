@@ -1,1 +1,56 @@
-<p>product-form works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ isEdit ? 'Editar' : 'Nuevo' }} Producto</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+          Debes ingresar un nombre
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Precio</mat-label>
+        <input matInput type="number" formControlName="price" />
+        <mat-error *ngIf="productForm.get('price')?.hasError('min')">
+          El precio no puede ser negativo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" formControlName="quantity" />
+        <mat-error *ngIf="productForm.get('quantity')?.hasError('min')">
+          La cantidad no puede ser negativa
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let c of categories" [value]="c">{{ c }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('category')?.hasError('required')">
+          La categoría es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+        <button mat-button type="button" (click)="router.navigate(['/products'])">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
