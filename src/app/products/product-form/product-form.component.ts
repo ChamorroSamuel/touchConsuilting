@@ -20,7 +20,7 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    public router: Router,        // <- hazlo público
+    public router: Router,
     private svc: ProductService
   ) {}
 
