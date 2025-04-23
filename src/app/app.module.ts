@@ -1,26 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './products/products.module';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ProductFormComponent } from './products/product-form/product-form.component';
-import { ProductListComponent } from './products/product-list/product-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    ProductFormComponent,
-    ProductListComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    SharedModule,
+    CoreModule,
+    AuthModule,
+    ProductsModule,
     AppRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
