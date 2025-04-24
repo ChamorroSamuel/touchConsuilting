@@ -68,6 +68,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
+    <button mat-raised-button color="accent"
+            *ngIf="userRole==='Administrador'"
+            (click)="downloadReport()">
+      Reporte PDF
+    </button>
     <mat-paginator [pageSize]="5"></mat-paginator>
   </mat-card-content>
 </mat-card>

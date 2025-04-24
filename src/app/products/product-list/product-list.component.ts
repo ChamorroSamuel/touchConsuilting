@@ -5,6 +5,7 @@ import { Product } from '../models/product.model';
 import { ProductService }     from '../services/product.service';
 import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
+import {ReportService} from '../../core/services/report.service';
 
 @Component({
   selector: 'app-product-list',
@@ -25,7 +26,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private svc: ProductService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private reportSvc: ReportService,
   ) {
     const u = this.auth.getUser();
     this.userRole = u?.role ?? null;
@@ -72,6 +74,20 @@ export class ProductListComponent implements OnInit {
     this.svc.delete(id).subscribe({
       next: () => this.loadAll(),
       error: err => console.error(err)
+    });
+  }
+
+  downloadReport() {
+    this.reportSvc.downloadLowInventoryReport().subscribe({
+      next: blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a   = document.createElement('a');
+        a.href    = url;
+        a.download = 'low-inventory.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: err => console.error('Error descargando reporte:', err)
     });
   }
 }
