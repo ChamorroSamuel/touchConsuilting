@@ -3,6 +3,36 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{ title }}</span>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="userRole === 'Administrador'">
+    <div class="notif-container">
+      <button mat-icon-button (click)="toggleDropdown()">
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <span *ngIf="notifications.length > 0" class="badge">
+        {{ notifications.length }}
+      </span>
+
+      <div class="notif-dropdown" *ngIf="showDropdown">
+        <ng-container *ngIf="notifications.length; else noNotifs">
+          <mat-list>
+            <mat-list-item *ngFor="let n of notifications">
+              <mat-icon matListIcon>warning</mat-icon>
+              <div matLine>{{ n.productName }}: {{ n.quantity }} unidad(es)</div>
+              <div matLine class="secondary">
+                {{ n.createdAt | date:'short' }}
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        <ng-template #noNotifs>
+          <div class="no-notifs">No hay notificaciones</div>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container" autosize>

@@ -19,7 +19,7 @@
             <mat-option *ngFor="let r of roles" [value]="r">{{ r }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="primary" class="full-width" [disabled]="loading">
+        <button mat-raised-button color="primary" class="full-width" routerLink="/login" [disabled]="loading">
           {{ loading ? 'Registrando...' : 'Registrar' }}
         </button>
         <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>

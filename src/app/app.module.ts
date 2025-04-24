@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor }     from './core/interceptors/jwt.interceptor';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -23,6 +26,9 @@ import { AppComponent } from './app.component';
     ProductsModule,
     AppRoutingModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductService }                    from '../services/product.service';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-product-form',
@@ -13,18 +14,34 @@ import { ProductService }                    from '../services/product.service';
 export class ProductFormComponent implements OnInit {
 
   productForm!: FormGroup;
-  categories = ['Cat1', 'Cat2', 'Cat3'];
   isEdit = false;
-  id!: string;
+  private id!: string;
+  categories = [
+    'Categoria 1',
+    'Categoria 2',
+    'Categoria 3',
+    'Categoria 4'
+  ];
+  userRole: string | null;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    public router: Router,
-    private svc: ProductService
-  ) {}
+    private svc: ProductService,
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    const u = this.auth.getUser();
+    this.userRole = u ? u.role : null;
+  }
 
   ngOnInit(): void {
+    const maybeId = this.route.snapshot.paramMap.get('id');
+    if (maybeId && this.userRole !== 'Administrador') {
+      this.router.navigate(['/products']);
+      return;
+    }
+
     this.productForm = this.fb.group({
       name:        ['', Validators.required],
       description: [''],
@@ -33,20 +50,48 @@ export class ProductFormComponent implements OnInit {
       category:    ['', Validators.required]
     });
 
-    this.id = this.route.snapshot.paramMap.get('id') || '';
-    if (this.id) {
+    if (maybeId) {
       this.isEdit = true;
-      this.svc.getById(this.id).subscribe(p => this.productForm.patchValue(p));
+      this.id = maybeId;
+      this.svc.getById(this.id).subscribe(prod => {
+        this.productForm.patchValue({
+          name:        prod.name,
+          description: prod.description,
+          price:       prod.price,
+          quantity:    prod.quantity,
+          category:    prod.category
+        });
+      });
     }
   }
 
   onSubmit(): void {
-    if (this.productForm.invalid) return;
-    const prod: Product = { id: this.id, ...this.productForm.value };
-    const op = this.isEdit
-      ? this.svc.update(this.id, prod)
-      : this.svc.create(prod);
+    if (this.userRole !== 'Administrador') {
+      alert('No tienes permisos para ' + (this.isEdit ? 'editar' : 'crear') + ' productos.');
+      return;
+    }
 
-    op.subscribe(() => this.router.navigate(['/products']));
+    if (this.productForm.invalid) {
+      return;
+    }
+
+    const dto = this.productForm.value as Product;
+
+    if (this.isEdit) {
+      this.svc.update(this.id, dto).subscribe({
+        next: () => this.router.navigate(['/products']),
+        error: (err: any) => console.error(err)
+      });
+    } else {
+      this.svc.create(dto).subscribe({
+        next: () => this.router.navigate(['/products']),
+        error: (err: any) => console.error(err)
+      });
+    }
+  }
+
+
+  onCancel(): void {
+    this.router.navigate(['/products']);
   }
 }
