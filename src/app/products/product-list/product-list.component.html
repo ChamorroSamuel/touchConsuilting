@@ -68,7 +68,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-
+    <div class="button-row">
     <button mat-raised-button color="accent"
             *ngIf="userRole==='Administrador'"
             (click)="downloadReport()">
@@ -80,6 +80,7 @@
       Descargar Todos (PdfSharpCore)
     </button>
 -->
+    </div>
     <mat-paginator [pageSize]="5"></mat-paginator>
   </mat-card-content>
 </mat-card>

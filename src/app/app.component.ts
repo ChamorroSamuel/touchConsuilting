@@ -32,7 +32,6 @@ export class AppComponent {
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
         const url = e.urlAfterRedirects;
-        
         this.showMenu = !url.startsWith('/login');
       });
   }

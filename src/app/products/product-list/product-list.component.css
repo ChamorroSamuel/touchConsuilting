@@ -1,0 +1,46 @@
+
+mat-card {
+  margin: 24px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+table.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+mat-paginator {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button[mat-mini-button] {
+  margin-right: 8px;
+}

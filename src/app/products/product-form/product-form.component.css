@@ -9,3 +9,50 @@ mat-card {
   gap: 8px;
   margin-top: 16px;
 }
+
+
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+mat-card-title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field.full-width {
+  margin-bottom: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.actions button[type="submit"] {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.actions button[type="button"] {
+  flex: none;
+}
