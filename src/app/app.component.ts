@@ -44,6 +44,10 @@ export class AppComponent {
   }
 
   loadNotifications() {
+    if (this.userRole !== 'Administrador') {
+      this.notifications = [];
+      return;
+    }
     this.notifSvc.getAll().subscribe(list => {
       this.notifications = list;
     });
@@ -55,6 +59,8 @@ export class AppComponent {
 
   logout() {
     this.auth.logout();
+    this.notifications = [];
+    this.userRole = null;
     this.sidenav?.close();
     this.router.navigate(['/login']);
   }
