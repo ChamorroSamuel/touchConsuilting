@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import {finalize} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,9 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   loading = false;
   errorMsg = '';
-  roles = ['Administrador', 'Empleado'];
+  roles = ['Administrador','Empleado'
+  //  ,'Supervisor'
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -33,16 +36,20 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.registerForm.invalid) return;
     this.loading = true;
-    this.errorMsg = '';
-
     const { username, password, role } = this.registerForm.value;
-    this.auth.register(username, password, role).subscribe({
-      next: () => this.router.navigate(['/products']),
-      error: () => {
-        this.errorMsg = 'Error al registrar';
-        this.loading = false;
-      }
-    });
+    this.auth.register(username, password, role)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe({
+        next: () => {
+          console.log('Registro OK');
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          console.error('Error al registrar');
+          this.errorMsg = 'No se pudo registrar. Intenta nuevamente.';
+        }
+      });
   }
+
 
 }

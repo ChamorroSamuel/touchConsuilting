@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from './core/services/auth.service';
-import { Router }               from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import { NotificationService }  from './core/services/notification.service';
 import { Notification }         from './core/models/notification.model';
+import {filter} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,13 @@ import { Notification }         from './core/models/notification.model';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
+  @ViewChild('sidenav', { static: false }) sidenav?: MatSidenav;
   title = 'touchConsulting';
 
   notifications: Notification[] = [];
   showDropdown = false;
   userRole: string | null;
+  showMenu = false;
 
   constructor(
     private auth: AuthService,
@@ -26,6 +28,13 @@ export class AppComponent {
   ) {
     const u = this.auth.getUser();
     this.userRole = u?.role ?? null;
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe((e: NavigationEnd) => {
+        const url = e.urlAfterRedirects;
+        // Bloquea Sidenav en login y register
+        this.showMenu = !(url === '/login' || url === '/register');
+      });
   }
 
   ngOnInit(): void {
@@ -47,7 +56,7 @@ export class AppComponent {
 
   logout() {
     this.auth.logout();
-    this.sidenav.close();
+    this.sidenav?.close();
     this.router.navigate(['/login']);
   }
 }

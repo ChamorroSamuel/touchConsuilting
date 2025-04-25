@@ -12,4 +12,11 @@ export class ReportService {
   downloadLowInventoryReport(): Observable<Blob> {
     return this.http.get(this.url, { responseType: 'blob' });
   }
+/*
+  downloadAllProductsPdfSharp(): Observable<Blob> {
+    return this.http
+      .get(`${environment.apiUrl.replace(/\/products$/, '')}/reports/all-pdfsharp`, { responseType: 'blob' })
+  }
+
+ */
 }

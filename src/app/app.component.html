@@ -1,3 +1,4 @@
+<ng-container *ngIf="showMenu">
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
@@ -46,3 +47,8 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</ng-container>
+
+<ng-container *ngIf="!showMenu">
+  <router-outlet></router-outlet>
+</ng-container>

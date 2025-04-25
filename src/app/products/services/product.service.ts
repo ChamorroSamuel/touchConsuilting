@@ -30,8 +30,5 @@ export class ProductService {
     return this.http.delete<void>(`${this.base}/${id}`);
   }
 
-  downloadLowInventoryReport(): Observable<Blob> {
-    return this.http.get(`${this.base}/reports/low-inventory`,
-      { responseType: 'blob' });
-  }
+
 }

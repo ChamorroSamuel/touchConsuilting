@@ -66,7 +66,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.userRole !== 'Administrador') {
+    if (this.userRole !== 'Administrador' && this.userRole !== 'Supervisor') {
       alert('No tienes permisos para ' + (this.isEdit ? 'editar' : 'crear') + ' productos.');
       return;
     }

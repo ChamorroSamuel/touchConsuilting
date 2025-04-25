@@ -90,4 +90,19 @@ export class ProductListComponent implements OnInit {
       error: err => console.error('Error descargando reporte:', err)
     });
   }
+/*
+  downloadAllReport(){
+    this.reportSvc.downloadAllProductsPdfSharp().subscribe({
+      next: blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a   = document.createElement('a');
+        a.href    = url;
+        a.download = 'AllProductsReport.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: err => console.error('Error descargando PDF:', err)
+    });
+  }
+  */
 }

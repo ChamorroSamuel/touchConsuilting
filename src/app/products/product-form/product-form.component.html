@@ -54,6 +54,8 @@
         <div class="actions">
           <button mat-raised-button color="primary" type="submit"
                   [disabled]="userRole !== 'Administrador'">
+                  <!--  && userRole !== 'Supervisor' -->
+
             {{ isEdit ? 'Guardar Cambios' : 'Crear Producto' }}
           </button>
 

@@ -1,7 +1,8 @@
 <mat-card>
   <mat-card-header class="header-row">
     <mat-card-title>Productos</mat-card-title>
-    <button mat-flat-button color="primary" routerLink="/products/new">Nuevo</button>
+    <button mat-flat-button color="primary" routerLink="/products/new"
+    >Nuevo</button>
   </mat-card-header>
 
   <mat-card-content>
@@ -73,6 +74,12 @@
             (click)="downloadReport()">
       Reporte PDF
     </button>
+    <!--
+    <button mat-raised-button color="primary"
+            (click)="downloadAllReport()">
+      Descargar Todos (PdfSharpCore)
+    </button>
+-->
     <mat-paginator [pageSize]="5"></mat-paginator>
   </mat-card-content>
 </mat-card>

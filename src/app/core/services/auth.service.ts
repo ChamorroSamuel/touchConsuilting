@@ -22,12 +22,13 @@ export class AuthService {
       );
   }
 
-  register(username: string, password: string, role: string): Observable<void> {
-    return this.http
-      .post<AuthResponse>(`${this.base}/register`, { username, password, role })
+  register(username: string, password: string, role: string) {
+    return this.http.post<{ token: string }>(
+      `${environment.apiUrl}/register`,
+      { username, password, role }
+    )
       .pipe(
-        tap(res => localStorage.setItem(this.tokenKey, res.token)),
-        map(() => {})
+        tap(res => localStorage.setItem('token', res.token))
       );
   }
 
