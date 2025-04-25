@@ -32,8 +32,8 @@ export class AppComponent {
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
         const url = e.urlAfterRedirects;
-        // Bloquea Sidenav en login y register
-        this.showMenu = !(url === '/login' || url === '/register');
+        
+        this.showMenu = !url.startsWith('/login');
       });
   }
 
