@@ -1,28 +1,21 @@
 <mat-card>
   <mat-card-header class="header-row">
     <mat-card-title>Productos</mat-card-title>
-    <button mat-flat-button color="primary" routerLink="/products/new"
+    <button routerLink="/products/new" class="buttonNuevo"
     >Nuevo</button>
   </mat-card-header>
 
   <mat-card-content>
     <div class="filter-row">
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Buscar</mat-label>
-        <input
-          matInput
-          #filterInput
-          (keyup)="applyFilter(filterInput.value)"
-          placeholder="Filtrar por nombre"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Categoría</mat-label>
-        <mat-select (selectionChange)="filterByCategory($event.value)">
-          <mat-option value="">Todas las categorías</mat-option>
-          <mat-option *ngFor="let c of categories" [value]="c">{{ c }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <input  class="input" placeholder="Buscar"
+             matInput
+             #filterInput
+             (keyup)="applyFilter(filterInput.value)"
+      />
+      <select class="input2" (change)="filterByCategory($any($event.target).value)">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
@@ -58,24 +51,57 @@
 
       <!-- Acciones -->
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let p">
-          <button mat-mini-button color="accent" (click)="onEdit(p.id)">Editar</button>
-          <button mat-mini-button color="warn" (click)="onDelete(p.id)">Eliminar</button>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;">Acciones</th>
+        <td mat-cell *matCellDef="let p" style="text-align: center;">
+          <div class="action-buttons">
+            <button class="buttontable edit" type="button" (click)="onEdit(p.id)">
+              <span class="button__text">Editar</span>
+              <span class="button__icon">
+          <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" viewBox="0 0 24 24">
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71
+                 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003
+                 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75
+                 1.84-1.82z"/>
+          </svg>
+        </span>
+            </button>
+
+            <button class="buttontable delete" type="button" (click)="onDelete(p.id)">
+              <span class="button__text">Eliminar</span>
+              <span class="button__icon">
+          <svg class="svg" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320"
+              style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+            <line
+              style="stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+              x1="80" x2="432" y1="112" y2="112"/>
+            <path
+              d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40"
+              style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>
+            <line x1="256" x2="256" y1="176" y2="400" style="stroke:#fff;stroke-width:32px"/>
+            <line x1="184" x2="192" y1="176" y2="400" style="stroke:#fff;stroke-width:32px"/>
+            <line x1="328" x2="320" y1="176" y2="400" style="stroke:#fff;stroke-width:32px"/>
+          </svg>
+        </span>
+            </button>
+          </div>
         </td>
       </ng-container>
+
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     <div class="button-row">
-    <button mat-raised-button color="accent"
+    <button mat-raised-button color="accent" class="buttonReport"
             *ngIf="userRole==='Administrador'"
             (click)="downloadReport()">
       Reporte PDF
     </button>
     <!--
-    <button mat-raised-button color="primary"
+    <button mat-raised-button color="primary" class="buttonReport"
             (click)="downloadAllReport()">
       Descargar Todos (PdfSharpCore)
     </button>

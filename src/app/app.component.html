@@ -1,52 +1,67 @@
 <ng-container *ngIf="showMenu">
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>{{ title }}</span>
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{ title }}</span>
 
-  <span class="spacer"></span>
+    <span class="spacer"></span>
 
-  <ng-container *ngIf="userRole === 'Administrador'">
-    <div class="notif-container">
-      <button mat-icon-button (click)="toggleDropdown()">
-        <mat-icon>notifications</mat-icon>
-      </button>
-      <span *ngIf="notifications.length > 0" class="badge">
-        {{ notifications.length }}
-      </span>
+    <ng-container *ngIf="userRole === 'Administrador'">
+      <div class="notif-container" style="margin-right: 40px; margin-top: 10px">
 
-      <div class="notif-dropdown" *ngIf="showDropdown">
-        <ng-container *ngIf="notifications.length; else noNotifs">
-          <mat-list>
-            <mat-list-item *ngFor="let n of notifications">
-              <mat-icon matListIcon>warning</mat-icon>
-              <div matLine>{{ n.productName }}: {{ n.quantity }} unidad(es)</div>
-              <div matLine class="secondary">
-                {{ n.createdAt | date:'short' }}
+        <button class="button" (click)="toggleDropdown()">
+          <svg viewBox="0 0 448 512" class="bell"><path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path></svg>
+        </button>
+        <span *ngIf="notifications.length > 0" class="badge">
+          {{ notifications.length }}
+        </span>
+
+        <div class="notif-dropdown" *ngIf="showDropdown" >
+          <div class="notifications-container" *ngIf="notifications.length > 0; else noNotifs">
+            <div *ngFor="let n of notifications" class="error-alert">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="error-svg">
+                    <path clip-rule="evenodd" fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10
+              11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0
+              00-1.414-1.414L10 8.586 8.707 7.293z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="error-prompt-container">
+                  <p class="error-prompt-heading">{{ n.productName }} con stock bajo</p>
+                  <div class="error-prompt-wrap">
+                    <ul class="error-prompt-list" role="list">
+                      <li>Stock actual: {{ n.quantity }} unidades</li>
+                      <li>{{ n.createdAt | date:'short' }}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </mat-list-item>
-          </mat-list>
-        </ng-container>
-        <ng-template #noNotifs>
-          <div class="no-notifs">No hay notificaciones</div>
-        </ng-template>
-      </div>
-    </div>
-  </ng-container>
-</mat-toolbar>
+            </div>
+          </div>
 
-<mat-sidenav-container class="sidenav-container" autosize>
-  <mat-sidenav #sidenav mode="over">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/products">Productos</a>
-      <a mat-list-item (click)="logout()">Cerrar sesión</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content class="p-4">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+          <ng-template #noNotifs>
+            <div class="no-notifs">No hay notificaciones</div>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" autosize>
+    <mat-sidenav #sidenav mode="over">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/products">Productos</a>
+        <a mat-list-item (click)="logout()">Cerrar sesión</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="p-4">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </ng-container>
 
 <ng-container *ngIf="!showMenu">

@@ -5,6 +5,18 @@ mat-card {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
 }
+.mat-mdc-header-cell {
+  text-align: center;
+}
+
+.mat-mdc-cell {
+  text-align: center;
+}
+
+mat-card-content {
+  padding: 0 16px;
+}
+
 
 .header-row {
   display: flex;
@@ -26,7 +38,8 @@ mat-card {
 
 table.full-width {
   width: 100%;
-  margin-bottom: 16px;
+  margin: 0 auto 16px auto;
+  border-collapse: collapse;
 }
 
 .button-row {
@@ -43,4 +56,214 @@ mat-paginator {
 
 button[mat-mini-button] {
   margin-right: 8px;
+}
+
+
+.buttonNuevo {
+  margin-left: auto;
+  width: auto;
+  padding: 1.3em 4em;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #5aa1c1;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.buttonNuevo:hover {
+  background-color: #fff;
+  box-shadow: 0px 15px 20px rgb(209, 209, 209);
+  color: #000000;
+  transform: translateY(-7px);
+}
+
+.buttonNuevo:active {
+  transform: translateY(-1px);
+}
+
+
+
+.buttonReport {
+  margin-right: auto;
+  width: auto;
+  padding: 1.3em 4em;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #5aa1c1;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.buttonReport:hover {
+  background-color: #fff;
+  box-shadow: 0px 15px 20px rgb(209, 209, 209);
+  color: #000000;
+  transform: translateY(-7px);
+}
+
+.buttonReport:active {
+  transform: translateY(-1px);
+}
+
+
+.input {
+  width: 65%;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+  box-shadow: 20px 20px 60px #c5c5c5,
+  -20px -20px 60px #ffffff;
+  transition: 0.3s;
+}
+
+.input:focus {
+  outline-color: #e8e8e8;
+  background: #e8e8e8;
+  box-shadow: inset 20px 20px 60px #c5c5c5,
+  inset -20px -20px 60px #ffffff;
+  transition: 0.3s;
+}
+
+
+.input2 {
+  width: 30%;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+  box-shadow: 20px 20px 60px #c5c5c5,
+  -20px -20px 60px #ffffff;
+  transition: 0.3s;
+}
+
+.input2:focus {
+  outline-color: #e8e8e8;
+  background: #e8e8e8;
+  box-shadow: inset 20px 20px 60px #c5c5c5,
+  inset -20px -20px 60px #ffffff;
+  transition: 0.3s;
+}
+
+
+/* DISEÑO BOTOND DE TABLAS */
+
+.buttontable {
+  position: relative;
+  border-radius: 6px;
+  width: 130px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 13px;
+  border: 1px solid transparent;
+  margin-right: 8px;
+}
+
+.buttontable .button__text {
+  transform: translateX(35px);
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttontable .button__icon {
+  position: absolute;
+  transform: translateX(91px);
+  height: 100%;
+  width: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.buttontable .svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Estilo botón Eliminar */
+.buttontable.delete {
+  background-color: #e50000;
+  border-color: #cc0000;
+}
+
+.buttontable.delete .button__icon {
+  background-color: #cc0000;
+}
+
+.buttontable.delete:hover {
+  background-color: #cc0000;
+}
+
+.buttontable.delete:hover .button__text {
+  color: transparent;
+}
+
+.buttontable.delete:hover .button__icon {
+  transform: translateX(0);
+  width: 100%;
+}
+
+.buttontable.delete:active {
+  border-color: #b20000;
+}
+
+/* Estilo botón Editar */
+.buttontable.edit {
+  background-color: #1e7ecd;
+  border-color: #0c5aa7;
+}
+
+.buttontable.edit .button__icon {
+  background-color: #0c5aa7;
+}
+
+.buttontable.edit:hover {
+  background-color: #0c5aa7;
+}
+
+.buttontable.edit:hover .button__text {
+  color: transparent;
+}
+
+.buttontable.edit:hover .button__icon {
+  transform: translateX(0);
+  width: 100%;
+}
+
+.buttontable.edit:active {
+  border-color: #06488c;
+}
+
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+td.mat-cell {
+  vertical-align: middle !important;
 }

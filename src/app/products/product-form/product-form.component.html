@@ -1,69 +1,106 @@
- <mat-card>
-    <mat-card-title>
-      {{ isEdit ? 'Editar Producto' : 'Nuevo Producto' }}
-    </mat-card-title>
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ isEdit ? 'Editar Producto' : 'Nuevo Producto' }}
+      </mat-card-title>
+    </mat-card-header>
+
     <mat-card-content>
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
         <!-- Nombre -->
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="name" />
-          <mat-error *ngIf="productForm.get('name')?.hasError('required')">
-            El nombre es obligatorio.
-          </mat-error>
-        </mat-form-field>
+        <div class="wave-group">
+          <input matInput formControlName="name" required type="text" class="input">
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">N</span>
+            <span class="label-char" style="--index: 1">o</span>
+            <span class="label-char" style="--index: 2">m</span>
+            <span class="label-char" style="--index: 3">b</span>
+            <span class="label-char" style="--index: 4">r</span>
+            <span class="label-char" style="--index: 5">e</span>
+          </label>
+        </div>
 
         <!-- Descripción -->
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Descripción</mat-label>
-          <textarea matInput formControlName="description"></textarea>
-        </mat-form-field>
+        <div class="wave-group">
+          <input matInput formControlName="description" required type="text" class="input">
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">D</span>
+            <span class="label-char" style="--index: 1">e</span>
+            <span class="label-char" style="--index: 2">s</span>
+            <span class="label-char" style="--index: 3">c</span>
+            <span class="label-char" style="--index: 4">r</span>
+            <span class="label-char" style="--index: 5">i</span>
+            <span class="label-char" style="--index: 6">p</span>
+            <span class="label-char" style="--index: 7">c</span>
+            <span class="label-char" style="--index: 8">i</span>
+            <span class="label-char" style="--index: 9">ó</span>
+            <span class="label-char" style="--index: 10">n</span>
+          </label>
+        </div>
 
         <!-- Precio -->
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Precio</mat-label>
-          <input type="number" matInput formControlName="price" />
-          <mat-error *ngIf="productForm.get('price')?.hasError('min')">
-            El precio no puede ser negativo.
-          </mat-error>
-        </mat-form-field>
+        <div class="wave-group">
+          <input matInput formControlName="price" required type="number" class="input">
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">P</span>
+            <span class="label-char" style="--index: 1">r</span>
+            <span class="label-char" style="--index: 2">e</span>
+            <span class="label-char" style="--index: 3">c</span>
+            <span class="label-char" style="--index: 4">i</span>
+            <span class="label-char" style="--index: 5">o</span>
+          </label>
+        </div>
 
         <!-- Cantidad -->
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Cantidad</mat-label>
-          <input type="number" matInput formControlName="quantity" />
-          <mat-error *ngIf="productForm.get('quantity')?.hasError('min')">
-            La cantidad no puede ser negativa.
-          </mat-error>
-        </mat-form-field>
+        <div class="wave-group">
+          <input matInput formControlName="quantity" required type="number" class="input">
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">C</span>
+            <span class="label-char" style="--index: 1">a</span>
+            <span class="label-char" style="--index: 2">n</span>
+            <span class="label-char" style="--index: 3">t</span>
+            <span class="label-char" style="--index: 4">i</span>
+            <span class="label-char" style="--index: 5">d</span>
+            <span class="label-char" style="--index: 6">a</span>
+            <span class="label-char" style="--index: 7">d</span>
+          </label>
+        </div>
 
         <!-- Categoría -->
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Categoría</mat-label>
-          <mat-select formControlName="category">
-            <mat-option *ngFor="let c of categories" [value]="c">
-              {{ c }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="productForm.get('category')?.hasError('required')">
-            La categoría es obligatoria.
-          </mat-error>
-        </mat-form-field>
-
-        <!-- Botones -->
-        <div class="actions">
-          <button mat-raised-button color="primary" type="submit"
-                  [disabled]="userRole !== 'Administrador'">
-                  <!--  && userRole !== 'Supervisor' -->
-
-            {{ isEdit ? 'Guardar Cambios' : 'Crear Producto' }}
-          </button>
-
-          <button mat-button type="button" (click)="onCancel()">
-            Cancelar
-          </button>
+        <div class="wave-group">
+          <select matInput formControlName="category" required class="input">
+            <option value="" disabled selected></option>
+            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          </select>
+          <span class="bar"></span>
+          <label class="label">
+            <span class="label-char" style="--index: 0">C</span>
+            <span class="label-char" style="--index: 1">a</span>
+            <span class="label-char" style="--index: 2">t</span>
+            <span class="label-char" style="--index: 3">e</span>
+            <span class="label-char" style="--index: 4">g</span>
+            <span class="label-char" style="--index: 5">o</span>
+            <span class="label-char" style="--index: 6">r</span>
+            <span class="label-char" style="--index: 7">í</span>
+            <span class="label-char" style="--index: 8">a</span>
+          </label>
         </div>
+
+        <button type="submit" [disabled]="userRole !== 'Administrador' && userRole !== 'Supervisor'">
+          {{ isEdit ? 'Guardar Cambios' : 'Crear Producto' }}
+        </button>
+
+        <button type="button" (click)="onCancel()" style="margin-top: 16px;">
+          Cancelar
+        </button>
+
       </form>
     </mat-card-content>
   </mat-card>
-
+</div>

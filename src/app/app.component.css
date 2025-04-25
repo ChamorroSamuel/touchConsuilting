@@ -1,5 +1,7 @@
 .sidenav-container {
+  background-color: white;
   height: 100vh;
+
 }
 .p-4 {
   padding: 16px;
@@ -15,16 +17,21 @@
 }
 
 .badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background: red;
+  background-color: red;
   color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
   font-size: 0.75rem;
-  z-index: 10;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-weight: bold;
 }
+
 
 
 .notif-dropdown {
@@ -54,8 +61,11 @@
 
 
 
+
 mat-toolbar {
+
   position: fixed;
+  background-color: #599baf;
   top: 0;
   left: 0;
   right: 0;
@@ -63,14 +73,139 @@ mat-toolbar {
 }
 
 .sidenav-container {
+
   margin-top: 64px;
   height: calc(100vh - 64px);
 }
 
 @media (max-width: 600px) {
   .sidenav-container {
+
     margin-top: 56px;
     height: calc(100vh - 56px);
   }
 }
 
+
+
+.notifications-container {
+  width: 320px;
+  height: auto;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.error-alert {
+  border-radius: 0.375rem;
+  padding: 1rem;
+  background-color: rgb(254 242 242);
+}
+
+.error-svg {
+  color: #F87171;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.error-prompt-heading {
+  color: #991B1B;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+}
+
+.error-prompt-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.25rem;
+}
+
+.error-prompt-wrap {
+  margin-top: 0.5rem;
+  color: #B91C1C;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.error-prompt-list {
+  padding-left: 1.25rem;
+  margin-top: 0.25rem;
+  list-style-type: disc;
+}
+
+/* campana */
+
+.button {
+  margin-bottom: 12px;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  border: none;
+}
+
+.bell {
+  width: 18px;
+}
+
+.bell path {
+  fill: rgb(56, 56, 56);
+}
+
+.button:hover {
+  background-color: white;
+}
+
+.button:hover .bell {
+  animation: bellRing 0.9s both;
+}
+
+/* bell ringing animation keyframes*/
+@keyframes bellRing {
+  0%,
+  100% {
+    transform-origin: top;
+  }
+
+  15% {
+    transform: rotateZ(10deg);
+  }
+
+  30% {
+    transform: rotateZ(-10deg);
+  }
+
+  45% {
+    transform: rotateZ(5deg);
+  }
+
+  60% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: rotateZ(2deg);
+  }
+}
+
+.button:active {
+  transform: scale(0.8);
+}

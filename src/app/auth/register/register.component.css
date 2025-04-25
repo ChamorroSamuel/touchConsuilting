@@ -72,6 +72,7 @@ mat-card-actions a:hover {
 }
 
 .wave-group .input {
+  color: white;
   font-size: 18px;
   padding: 12px 12px 12px 5px;
   display: block;
